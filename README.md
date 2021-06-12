@@ -23,16 +23,14 @@ This tools is in the making
 * 5. Paste the webhooks url and chat bot token in the Emissary configuration file.
 
 # 2. Download / Clone the code
-```
-ruby
+```ruby
 
 git clone git@github.com:MakarovCode/Emissary.git
 
 ```
 
 # 3. Create a file runner.rb with the next lines:
-```
-ruby
+```ruby
 
 require './emissary'
 
