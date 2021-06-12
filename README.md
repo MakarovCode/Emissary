@@ -42,3 +42,71 @@ end
 emi = Emissary.new
 
 ```
+
+# 4. Configure your log readers and commands in the loggr.json file
+
+See some examples
+
+```javascript
+{
+  "rails": {
+    "name": "Rails Logger",
+    "path": "path/to/rails/log",
+    "condition": "Completed 500 Internal Server Error",
+    "lines": 10,
+    "fetch_each": 10,
+    "language": "ruby",
+    "ignore": ["", " ", "  "],
+    "command": "rails",
+    "bash_command": "",
+    "clear_each": 48,
+    "report_each": 12,
+    "trello_list_id": "",
+    "color": "#FF0000",
+    "alias": "ror"
+  },
+  "disk": {
+    "name": "Disk Usage",
+    "path": "",
+    "condition": "",
+    "lines": 0,
+    "fetch_each": 0,
+    "language": "text",
+    "ignore": ["", " ", "  "],
+    "command": "disk",
+    "bash_command": "df -h",
+    "clear_each": 0,
+    "report_each": 0,
+    "trello_list_id": "",
+    "color": "#00FF00",
+    "alias": ""
+  },
+  "cpu": {
+    "name": "CPU Usage",
+    "path": "",
+    "condition": "",
+    "lines": 0,
+    "fetch_each": 0,
+    "language": "text",
+    "ignore": ["", " ", "  "],
+    "command": "cpu",
+    "bash_command": "mpstat",
+    "clear_each": 0,
+    "report_each": 0,
+    "trello_list_id": "",
+    "color": "#00FF00",
+    "alias": ""
+  }
+}
+```
+
+# 5. If everything goes write
+You can type the next commands in your Discord Server Channel and the Chatbot will answer.
+
+```ruby
+!emy rails fetch #This will read the log file for the setup with command rails
+
+!emy rails report #this will send to the discord general reports of errors catched
+
+!emy disk #This will send back to discord the usage of the server disk partitions
+```
