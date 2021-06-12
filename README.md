@@ -35,7 +35,6 @@ git clone git@github.com:MakarovCode/Emissary.git
 require './emissary'
 
 Emissary.configure do |config|
-  # usuario transacional para sms instantaneos
   config.webhooks_url  = '{webhooks_url}'
   config.bot_token  = '{bot_token}'
 end
