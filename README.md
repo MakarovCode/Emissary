@@ -12,11 +12,11 @@ Receive error catching reports to a Discord Server Channel, and use chatbots to 
 # Roadmap
 This tools is in the making
 * Upload as Ruby Gem
-* Implement Gem [https://github.com/jeremytregunna/ruby-trello]jeremytregunna/ruby-trello For managinf Trello Cards with error catching.
+* Implement Gem [https://github.com/jeremytregunna/ruby-trello](jeremytregunna/ruby-trello) For managinf Trello Cards with error catching.
 *
 
 # Setup your Discord Server, Channel, Application and Bot
-* 1. Go To [https://discord.com/developers]Discord Developers
+* 1. Go To [https://discord.com/developers](Discord Developers)
 * 2. Create a new application and under the Bot option create a new bot
 * 3. Add your new bot to your server Channel
 * 4. Create a webhook in you server channel
