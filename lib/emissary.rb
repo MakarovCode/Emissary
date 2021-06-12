@@ -4,7 +4,7 @@ require 'pry';
 require "json"
 require 'open3'
 
-require './loggr';
+require './lib/loggr';
 
 class Emissary
 
@@ -35,7 +35,7 @@ class Emissary
 
   def read_loggrs
 
-    file = File.open "./loggr.json"
+    file = File.open "./lib/loggr.json"
     raw_loggrs = JSON.load file
     raw_loggrs.each do |k, v|
       loggr = Loggr.new v
