@@ -100,7 +100,7 @@ See some examples
 }
 ```
 
-# 5. If everything goes write
+# 5. If everything goes right
 You can type the next commands in your Discord Server Channel and the Chatbot will answer.
 
 ```ruby
