@@ -23,7 +23,7 @@ Receive error catching reports to a Discord Server Channel, and use chatbots to 
 * 5. Use the Trello **ListID** in the loggr.json file under the configuration you want trello to work with.
 
 # 2. Download / Clone the code
-```git
+```bash
 
 git clone git@github.com:MakarovCode/Emissary.git
 
@@ -37,6 +37,8 @@ create runner.rb or config/initializer/emissary.rb file
 require './emissary'
 
 Emissary.configure do |config|
+  config.server_name = "A name for chat titles"
+  config.header_format = "__***{title}***__" #Any markup
   config.webhooks_url  = '{discord webhooks_url}'
   config.bot_token  = '{discord bot_token}'
   config.trello_public_key = '{trello public_key}'

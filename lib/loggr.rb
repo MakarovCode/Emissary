@@ -108,7 +108,7 @@ class Loggr
 
     client = Discordrb::Webhooks::Client.new(url: Emissary.webhooks_url)
     client.execute do |builder|
-      builder.content = "**Report Alert** from **#{@name}** at #{Time.now}"
+      builder.content = "__**#{Emissary.server_name}**__\n**Report Alert** from **#{@name}** at #{Time.now}"
       builder.add_embed do |embed|
         embed.title = "#{@condition}"
         embed.description = "**Ocurrences: **\n#{@messages.count{|k,v| v[:reported] == false}}"
@@ -129,7 +129,7 @@ class Loggr
     end
 
     def message_to_chat(message)
-      formatted("**ID: #{message[:id]}**\nOcurrences: #{message[:count]}\n\n```#{@language}\n#{lines_to_code(message)}```")
+      formatted("#{Emissary.header}\n**ID: #{message[:id]}**\nOcurrences: #{message[:count]}\n\n```#{@language}\n#{lines_to_code(message)}```")
     end
 
     def clear
