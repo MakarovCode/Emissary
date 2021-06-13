@@ -1,9 +1,10 @@
 require 'thread'
 require 'discordrb/webhooks'
+require 'trello'
 
 class Loggr
 
-  attr_accessor :messages, :path, :condition, :lines, :fetch_each, :language, :ignore, :command, :bash_command, :clear_each, :trello_list_id, :color, :name, :report_each, :timer, :config, :last_id, :alias
+  attr_accessor :messages, :path, :condition, :lines, :fetch_each, :language, :ignore, :command, :bash_command, :clear_each, :trello_list_id, :trello_labels, :trello_members_ids, :color, :name, :report_each, :timer, :config, :last_id, :alias
 
   def initialize(config={})
     @config = config
@@ -28,6 +29,8 @@ class Loggr
     @clear_each = config["clear_each"]
     @report_each = config["report_each"]
     @trello_list_id = config["trello_list_id"]
+    @trello_labels = config["trello_labels"].downcase.split(',').map(&:strip).map(&:to_sym) if config["trello_labels"]
+    @trello_members_ids = config["trello_members_ids"].split(',').map(&:strip) if config["trello_members_ids"]
     @color = config["color"]
     @alias = config["alias"]
     @last_id = 0
@@ -121,9 +124,6 @@ class Loggr
           end
         end
       end
-
-      create_trello_card
-
     end
 
     def message_to_chat(message)
@@ -134,6 +134,22 @@ class Loggr
       init_config
     end
 
-    def create_trello_card
+    def create_trello_card(message)
+      client = Trello::Client.new(
+        developer_public_key: Emissary.trello_public_key,
+        member_token: Emissary.trello_member_token
+      )
+
+      card = client.create(:card,
+        {
+          'name' => message[:lines][1],
+          'desc' => "Ocurrences: #{message[:count]}\n\n```#{@language}\n#{lines_to_code(message)}```",
+          'idList' => @trello_list_id,
+          'labels' => @trello_labels,
+          'idMembers' => @trello_members_ids,
+        }
+      )
+
+      card.url
     end
   end

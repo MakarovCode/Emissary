@@ -11,7 +11,9 @@
     "bash_command": "",
     "clear_each": 48,
     "report_each": 12,
-    "trello_list_id": "",
+    "trello_list_id": "60c54865ddeb95815a4b8993",
+    "trello_labels": "",
+    "trello_members_ids": "",
     "color": "#FF0000",
     "alias": "ror"
   },

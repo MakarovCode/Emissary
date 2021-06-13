@@ -9,7 +9,7 @@ require './lib/loggr';
 class Emissary
 
   class << self
-    attr_accessor :webhooks_url, :bot_token
+    attr_accessor :webhooks_url, :bot_token, :trello_public_key, :trello_member_token
     def configure(&block)
       block.call(self)
     end
@@ -69,7 +69,14 @@ class Emissary
               elsif args[1] == "last"
                 loggr.message_to_chat loggr.last_message
               elsif ![nil, ""].include?(args[1]) && args[1].include?(loggr.alias)
-                loggr.message_to_chat loggr.message_by_id(args[1])
+                if args.count > 2
+                  if args[2] == "trello"
+                    card_url = loggr.create_trello_card loggr.message_by_id(args[1])
+                    "**Trello card added.**\n#{card_url}"
+                  end
+                else
+                  loggr.message_to_chat loggr.message_by_id(args[1])
+                end
               else
                 "Wrong arguments for command #{command}:\n**last**: Last Message.\n**report**: Generate report before time.\n**{id}**: Message with ID"
               end
