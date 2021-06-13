@@ -12,31 +12,43 @@ Receive error catching reports to a Discord Server Channel, and use chatbots to 
 # Roadmap
 This tools is in the making
 * Upload as Ruby Gem
-* Implement Gem [jeremytregunna/ruby-trello](https://github.com/jeremytregunna/ruby-trello) For managinf Trello Cards with error catching.
-*
+* Regex conditioning
+* Slack
+* Email reports
 
 # Setup your Discord Server, Channel, Application and Bot
 * 1. Go To [Discord Developers](https://discord.com/developers)
 * 2. Create a new application and under the Bot option create a new bot
 * 3. Add your new bot to your server Channel
-* 4. Create a webhook in you server channel
-* 5. Paste the webhooks url and chat bot token in the Emissary configuration file.
+* 4. Create a **webhook** in you server channel
+* 5. Paste the **webhooks url** and chat bot token in the Emissary configuration file.
+
+# Setup your Trello Board and List
+* 1. Go To [Trello App Key Generator](https://trello.com/app-key)
+* 2. Click in **Token** to create your member token *(be aware of expiration time)*
+* 3. Copy both your **public_key** and **member_token** into the initializer file or runner
+* 4. Find your Trello **ListID**, you can do this by openning the web tools in your browser, click on the navigation tab and watch for the navigation log when editing the name of your list, the ID will be visible under the **Preview Tab**
+* 5. Use the Trello **ListID** in the loggr.json file under the configuration you want trello to work with.
 
 # 2. Download / Clone the code
-```ruby
+```git
 
 git clone git@github.com:MakarovCode/Emissary.git
 
 ```
 
-# 3. Create a file runner.rb with the next lines:
+# 3. Make it run
+create runner.rb or config/initializer/emissary.rb file
+
 ```ruby
 
 require './emissary'
 
 Emissary.configure do |config|
-  config.webhooks_url  = '{webhooks_url}'
-  config.bot_token  = '{bot_token}'
+  config.webhooks_url  = '{discord webhooks_url}'
+  config.bot_token  = '{discord bot_token}'
+  config.trello_public_key = '{trello public_key}'
+  config.trello_member_token = '{trello member_token}'
 end
 
 emi = Emissary.new
@@ -109,4 +121,6 @@ You can type the next commands in your Discord Server Channel and the Chatbot wi
 !emy rails report #this will send to the discord general reports of errors catched
 
 !emy disk #This will send back to discord the usage of the server disk partitions
+
+!emy rails {id} trello #Add message report to trello list
 ```
