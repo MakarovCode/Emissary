@@ -1,6 +1,5 @@
 require 'discordrb'
 
-require 'pry';
 require "json"
 
 
