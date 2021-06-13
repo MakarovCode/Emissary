@@ -1,14 +1,11 @@
 require 'discordrb'
-
 require "json"
-
-
-require './lib/loggr';
+require 'loggr';
 
 class Emissary
 
   class << self
-    attr_accessor :webhooks_url, :bot_token, :trello_public_key, :trello_member_token, :server_name, :header_format
+    attr_accessor :webhooks_url, :bot_token, :trello_public_key, :trello_member_token, :server_name, :header_format, :json_file_path
     def configure(&block)
       block.call(self)
     end
@@ -38,7 +35,7 @@ class Emissary
 
   def read_loggrs
 
-    file = File.open "./lib/loggr.json"
+    file = File.open Emissary.json_file_path
     raw_loggrs = JSON.load file
     raw_loggrs.each do |k, v|
       loggr = Loggr.new v

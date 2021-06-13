@@ -72,7 +72,7 @@ class Loggr
         if @messages["#{file_lines[i+1]}"].nil?
           @last_id += 1
           @messages["#{file_lines[i+1]}"] = {
-            id: "#{@alias}-#{@last_id}",
+            id: "#{Emissary.server_name}-#{@alias}-#{@last_id}",
             trigger: "Completed 500 Internal Server Error",
             lines: file_lines[i..(i+@lines)],
             count: 1,
@@ -93,7 +93,7 @@ class Loggr
   end
 
   def last_message
-    message_by_id("#{@alias}-#{@last_id}")
+    message_by_id("#{Emissary.server_name}-#{@alias}-#{@last_id}")
   end
 
   def lines_to_code(message)

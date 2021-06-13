@@ -123,8 +123,12 @@ You can type the next commands in your Discord Server Channel and the Chatbot wi
 ```
 # Roadmap
 This tools is in the making
-* Upload as Ruby Gem
+* Multi server with the same BOT
+* Better command params handling
+* Convert the message HASH into a Ruby Class
+* Change the JSON config file to a init class configuration for better customization
+* Title dates formatting
+* Gem dependencies
 * Regex conditioning
 * Slack Integration
 * Email reports Integration
-* Convert the message HASH into a Ruby Class
