@@ -2,7 +2,7 @@ require 'discordrb'
 
 require 'pry';
 require "json"
-require 'open3'
+
 
 require './lib/loggr';
 
@@ -84,7 +84,7 @@ class Emissary
               "You didn't write an argument:\n**last**: Last Message.\n**report**: Generate report before time.\n**{id}**: Message with ID"
             end
           else
-            syscall(loggr.bash_command)
+            loggr.syscall
           end
         else
           "Command not found: #{command}"
@@ -97,13 +97,6 @@ class Emissary
     bot.run
   end
 
-  def syscall(*cmd)
-    begin
-      stdout, stderr, status = Open3.capture3(*cmd)
-      status.success? && stdout.slice!(0..-(1 + $/.size)).gsub(/^(.{1500,}?).*/m,'\1...') # strip trailing eol
-    rescue
-      "The command #{cmd} could not be executed"
-    end
-  end
+
 
 end

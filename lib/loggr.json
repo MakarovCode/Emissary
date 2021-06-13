@@ -15,7 +15,8 @@
     "trello_labels": "",
     "trello_members_ids": "",
     "color": "#FF0000",
-    "alias": "ror"
+    "alias": "ror",
+    "format": ""
   },
   "disk": {
     "name": "Disk Usage",
@@ -31,7 +32,8 @@
     "report_each": 0,
     "trello_list_id": "",
     "color": "#00FF00",
-    "alias": ""
+    "alias": "",
+    "format": {"from": "", "to": ""}
   },
   "cpu": {
     "name": "CPU Usage",
@@ -47,6 +49,7 @@
     "report_each": 0,
     "trello_list_id": "",
     "color": "#00FF00",
-    "alias": ""
+    "alias": "",
+    "format": {"from": "", "to": ""}
   }
 }

@@ -8,14 +8,6 @@ Receive error catching reports to a Discord Server Channel, and use chatbots to 
 * You can also use chatbots to fetch and generate reports any time outside the timeframes configurated.
 * You can also configurate linux commands and receive in discord the outputs or results.
 
-
-# Roadmap
-This tools is in the making
-* Upload as Ruby Gem
-* Regex conditioning
-* Slack
-* Email reports
-
 # Setup your Discord Server, Channel, Application and Bot
 * 1. Go To [Discord Developers](https://discord.com/developers)
 * 2. Create a new application and under the Bot option create a new bot
@@ -75,7 +67,8 @@ See some examples
     "report_each": 12,
     "trello_list_id": "",
     "color": "#FF0000",
-    "alias": "ror"
+    "alias": "ror",
+    "format": ""
   },
   "disk": {
     "name": "Disk Usage",
@@ -91,7 +84,8 @@ See some examples
     "report_each": 0,
     "trello_list_id": "",
     "color": "#00FF00",
-    "alias": ""
+    "alias": "",
+    "format": {"from": "  ", "to": "|"}
   },
   "cpu": {
     "name": "CPU Usage",
@@ -107,7 +101,8 @@ See some examples
     "report_each": 0,
     "trello_list_id": "",
     "color": "#00FF00",
-    "alias": ""
+    "alias": "",
+    "format": {"from": "  ", "to": "|"}
   }
 }
 ```
@@ -124,3 +119,10 @@ You can type the next commands in your Discord Server Channel and the Chatbot wi
 
 !emy rails {id} trello #Add message report to trello list
 ```
+# Roadmap
+This tools is in the making
+* Upload as Ruby Gem
+* Regex conditioning
+* Slack Integration
+* Email reports Integration
+* Convert the message HASH into a Ruby Class

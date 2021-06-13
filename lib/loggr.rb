@@ -1,10 +1,11 @@
 require 'thread'
 require 'discordrb/webhooks'
 require 'trello'
+require 'open3'
 
 class Loggr
 
-  attr_accessor :messages, :path, :condition, :lines, :fetch_each, :language, :ignore, :command, :bash_command, :clear_each, :trello_list_id, :trello_labels, :trello_members_ids, :color, :name, :report_each, :timer, :config, :last_id, :alias
+  attr_accessor :messages, :path, :condition, :lines, :fetch_each, :language, :ignore, :command, :bash_command, :clear_each, :trello_list_id, :trello_labels, :trello_members_ids, :color, :name, :report_each, :timer, :config, :last_id, :alias, :format
 
   def initialize(config={})
     @config = config
@@ -34,6 +35,7 @@ class Loggr
     @color = config["color"]
     @alias = config["alias"]
     @last_id = 0
+    @format = config["format"]
   end
 
   def start
@@ -109,7 +111,7 @@ class Loggr
       builder.content = "**Report Alert** from **#{@name}** at #{Time.now}"
       builder.add_embed do |embed|
         embed.title = "#{@condition}"
-        embed.description = "**Ocurrences: **\n#{@messages.count}"
+        embed.description = "**Ocurrences: **\n#{@messages.count{|k,v| v[:reported] == false}}"
         embed.color = @color
         embed.timestamp = Time.now
         embed.fields = []
@@ -117,7 +119,7 @@ class Loggr
           unless v[:reported]
             embed.fields.push({
               "name": "**ID: #{v[:id]}**\n\nOcurrences: #{v[:count]}",
-              "value": "```#{@language}\n#{v[:lines][0]}\n#{v[:lines][1]}```"
+              "value": formatted("```#{@language}\n#{v[:lines][0]}\n#{v[:lines][1]}```")
               })
               v[:reported] = true
             end
@@ -127,7 +129,7 @@ class Loggr
     end
 
     def message_to_chat(message)
-      "**ID: #{message[:id]}**\nOcurrences: #{message[:count]}\n\n```#{@language}\n#{lines_to_code(message)}```"
+      formatted("**ID: #{message[:id]}**\nOcurrences: #{message[:count]}\n\n```#{@language}\n#{lines_to_code(message)}```")
     end
 
     def clear
@@ -151,5 +153,22 @@ class Loggr
       )
 
       card.url
+    end
+
+    def formatted(text)
+      if @format != ""
+        text.gsub(@format["from"], @format["to"])
+      else
+        text
+      end
+    end
+
+    def syscall
+      begin
+        stdout, stderr, status = Open3.capture3(@bash_command)
+        status.success? && formatted(stdout.slice!(0..-(1 + $/.size)).gsub(/^(.{1500,}?).*/m,'\1...'))# strip trailing eol
+      rescue
+        "The command #{@bash_command} could not be executed"
+      end
     end
   end
