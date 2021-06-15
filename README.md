@@ -2,6 +2,9 @@
 Simple error catcher integrated with services like Discord and Trello, use chatbots to monitor your application and server.
 Receive error catching reports to a Discord Server Channel, and use chatbots to send commands and fetch reports.
 
+# PRESENTATION
+![presentation](https://drive.google.com/file/d/1Ocsu2hL2VuTvmEn8WbOmMNWyxosEXqgV/view?usp=sharing)
+
 # Features
 * This tools allows you to configurate the errors or lines you want to capture from any log file, in this example you will find a configuration for catching HTTP ERROR 500.
 * You can configurate the timeframes in which the logs will be read, the conditions that triggers the errores, the lines to fetch from the files, the language to markup the error to discord, characters to ignore, how often the errors fetched would be clear, and how often you want a receive reports with error ocurrences.
