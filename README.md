@@ -107,6 +107,23 @@ See some examples
     "color": "#00FF00",
     "alias": "",
     "format": {"from": "  ", "to": "|"}
+  },
+  "clear_log_file": {
+    "name": "Clear log file",
+    "path": "",
+    "condition": "",
+    "lines": 0,
+    "fetch_each": 0,
+    "language": "text",
+    "ignore": ["", " ", "  "],
+    "command": "cpu",
+    "bash_command": "rm path/to/rails/log && touch path/to/rails/log",
+    "clear_each": 0,
+    "report_each": 0,
+    "trello_list_id": "",
+    "color": "#00FF00",
+    "alias": "",
+    "format": {"from": "", "to": ""}
   }
 }
 ```
@@ -168,6 +185,7 @@ WantedBy=multi-user.target
 This tools is in the making
 * ~~Multi server with the same BOT~~
 * ~~bundle exec runner for better daemonization and independence~~
+* Send whole messages batch to trello
 * Better command params handling
 * Convert the message HASH into a Ruby Class
 * Change the JSON config file to a init class configuration for better customization
