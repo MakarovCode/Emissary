@@ -2,7 +2,7 @@
 Simple error catcher integrated with services like Discord and Trello, use chatbots to monitor your application and server.
 Receive error catching reports to a Discord Server Channel, and use chatbots to send commands and fetch reports.
 
-# PRESENTATION
+# Keynotes / Presentation
 [![Watch the presentation](https://github.com/MakarovCode/Emissary/raw/main/thumb.png)](https://dms.licdn.com/playlist/C4E05AQHyxbCfCVGHYA/mp4-720p-30fp-crf28/0/1623710691404?e=1623808800&v=beta&t=gUzmyqiD7vgxfWC7KYeU53-us6buF-kf2o60RfZfxuQ)
 
 # Features
@@ -11,14 +11,18 @@ Receive error catching reports to a Discord Server Channel, and use chatbots to 
 * You can also use chatbots to fetch and generate reports any time outside the timeframes configurated.
 * You can also configurate linux commands and receive in discord the outputs or results.
 
-# Setup your Discord Server, Channel, Application and Bot
+# Setup your Discord Server
+For this version you need a Discord server, also, you'll need to register as a developer and create an Application and a Bot
+
 * 1. Go To [Discord Developers](https://discord.com/developers)
-* 2. Create a new application and under the Bot option create a new bot
+* 2. Create a new **application** and under the **Bot** option create a new bot
 * 3. Add your new bot to your server Channel
 * 4. Create a **webhook** in you server channel
-* 5. Paste the **webhooks url** and chat bot token in the Emissary configuration file.
+* 5. Paste the **webhooks url** and chat bot token in the **Emissary** configuration file.
 
-# Setup your Trello Board and List
+# Setup your Trello (Optional).
+Basically you want to create or use an existing Board and List.
+
 * 1. Go To [Trello App Key Generator](https://trello.com/app-key)
 * 2. Click in **Token** to create your member token *(be aware of expiration time)*
 * 3. Copy both your **public_key** and **member_token** into the initializer file or runner
@@ -40,7 +44,8 @@ gem install "emissary-ruby"
 
 ```
 
-# 3. Configure your log readers and commands by creating a file emissary.json inside your project.
+# 3. Confugure and Customize
+Configure your log readers and commands by creating a file emissary.json inside your project.
 
 See some examples
 
@@ -100,7 +105,7 @@ See some examples
 }
 ```
 
-# 3. Make it run
+# 4. Make it run
 Run the **bundle exec emissary** command and pass as parameter the path to the **emissary.json** file you just created
 
 ```ruby
