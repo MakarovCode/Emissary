@@ -58,16 +58,24 @@ class Emissary
           if loggr.bash_command == ""
             if args.count > 1
               if args[1] == "report"
-                loggr.report
-                "#{Emissary.header}\nGenerating Last Report"
+                if args[2].nil? || (!args[2].nil? && args[2] == Emissary.server_name)
+                  loggr.report
+                  "#{Emissary.header}\nGenerating Last Report"
+                end
               elsif args[1] == "fetch"
-                loggr.fetch
-                "#{Emissary.header}\nFetching Report"
+                if args[2].nil? || (!args[2].nil? && args[2] == Emissary.server_name)
+                  loggr.fetch
+                  "#{Emissary.header}\nFetching Report"
+                end
               elsif args[1] == "clear"
-                loggr.clear
-                "#{Emissary.header}\nClearing Report"
+                if args[2].nil? || (!args[2].nil? && args[2] == Emissary.server_name)
+                  loggr.clear
+                  "#{Emissary.header}\nClearing Report"
+                end
               elsif args[1] == "last"
-                loggr.message_to_chat loggr.last_message
+                if args[2].nil? || (!args[2].nil? && args[2] == Emissary.server_name)
+                  loggr.message_to_chat loggr.last_message
+                end
               elsif ![nil, ""].include?(args[1]) && args[1].include?(loggr.alias)
                 if args.count > 2
                   if args[2] == "trello"

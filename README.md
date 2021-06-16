@@ -25,38 +25,26 @@ Receive error catching reports to a Discord Server Channel, and use chatbots to 
 * 4. Find your Trello **ListID**, you can do this by openning the web tools in your browser, click on the navigation tab and watch for the navigation log when editing the name of your list, the ID will be visible under the **Preview Tab**
 * 5. Use the Trello **ListID** in the loggr.json file under the configuration you want trello to work with.
 
-# 2. Download / Clone the code
-```bash
-
-git clone git@github.com:MakarovCode/Emissary.git
-
-```
-
-# 3. Make it run
-create runner.rb or config/initializer/emissary.rb file
-
+# 2. Install gem and dependencies
 ```ruby
 
-require './emissary'
+#Gemfile
+gem "emissary-ruby"
+gem "discordrb"
+gem "ruby-trello"
 
-Emissary.configure do |config|
-  config.server_name = "A name for chat titles"
-  config.header_format = "__***{title}***__" #Any markup
-  config.webhooks_url  = '{discord webhooks_url}'
-  config.bot_token  = '{discord bot_token}'
-  config.trello_public_key = '{trello public_key}'
-  config.trello_member_token = '{trello member_token}'
-end
-
-emi = Emissary.new
+#Or install each gem
+gem install "discordrb"
+gem install "ruby-trello"
+gem install "emissary-ruby"
 
 ```
 
-# 4. Configure your log readers and commands in the loggr.json file
+# 3. Configure your log readers and commands by creating a file emissary.json inside your project.
 
 See some examples
 
-```javascript
+```json
 {
   "rails": {
     "name": "Rails Logger",
@@ -112,6 +100,14 @@ See some examples
 }
 ```
 
+# 3. Make it run
+Run the **bundle exec emissary** command and pass as parameter the path to the **emissary.json** file you just created
+
+```ruby
+bundle exec emissary "/path/to/config/file.json"
+
+```
+
 # 5. If everything goes right
 You can type the next commands in your Discord Server Channel and the Chatbot will answer.
 
@@ -124,6 +120,7 @@ You can type the next commands in your Discord Server Channel and the Chatbot wi
 
 !emy rails {id} trello #Add message report to trello list
 ```
+
 # Roadmap
 This tools is in the making
 * Multi server with the same BOT
@@ -135,3 +132,5 @@ This tools is in the making
 * Regex conditioning
 * Slack Integration
 * Email reports Integration
+* Authy integration for TwoFactor authentication for sensible commands
+* API Keys with ENV variables

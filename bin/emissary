@@ -1,0 +1,28 @@
+#!/usr/bin/env ruby
+
+require_relative '../lib/emissary'
+
+file = File.open ARGV[0]
+c_config = JSON.load file
+
+Emissary.configure do |config|
+  # usuario transacional para sms instantaneos
+  config.server_name = c_config["server_name"]
+  config.header_format = c_config["header_format"]
+  config.webhooks_url  = c_config["webhooks_url"]
+  config.bot_token  = c_config["bot_token"]
+  config.trello_public_key = c_config["trello_public_key"]
+  config.trello_member_token = c_config["trello_member_token"],
+  config.json_file_path = ARGV[0]
+end
+
+
+begin
+  puts "====> Emissary is starting..."
+  puts "====> Server name #{Emissary.server_name}..."
+
+  emi = Emissary.new
+rescue => e
+  puts "#{e}"
+  exit 1
+end
