@@ -153,8 +153,8 @@ You can type the next commands in your Discord Server Channel and the Chatbot wi
 * Change **WorkingDirectory** and the **ExecStart** to your server configurations
 * Change **User** and **Group** to the user you user for deployment
 
+Usually you create this file as: **/lib/systemd/system/emissary.service**
 ```ruby
-
 [Unit]
 Description=emissary
 After=syslog.target network.target
@@ -180,6 +180,29 @@ SyslogIdentifier=emissary
 WantedBy=multi-user.target
 
 ```
+
+In case you use capistrano and you deamonize Emissary: **config/deploy.rb**
+
+```ruby
+
+namespace :emissary do
+  task :quiet do
+    on roles(:app) do
+      puts capture("pgrep -f 'emissary' | xargs kill -TSTP")
+    end
+  end
+  task :restart do
+    on roles(:app) do
+      execute! :sudo, :systemctl, :restart, :emissary
+    end
+  end
+end
+
+after 'deploy:starting', 'emissary:quiet'
+after 'deploy:reverted', 'emissary:restart'
+after 'deploy:published', 'emissary:restart'
+```
+
 
 # Roadmap
 This tools is in the making
