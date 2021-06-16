@@ -126,9 +126,42 @@ You can type the next commands in your Discord Server Channel and the Chatbot wi
 !emy rails {id} trello #Add message report to trello list
 ```
 
+# Daemonize Emissary
+* Change **WorkingDirectory** and the **ExecStart** to your server configurations
+* Change **User** and **Group** to the user you user for deployment
+
+```ruby
+
+[Unit]
+Description=emissary
+After=syslog.target network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/rails/my_project/current
+ExecStart=/home/rails/.rbenv/shims/bundle exec emissary /home/rails/my_project/shared/emissary.json
+
+User=rails
+Group=rails
+UMask=0002
+
+RestartSec=1
+Restart=on-failure
+
+StandardOutput=syslog
+StandardError=syslog
+
+SyslogIdentifier=emissary
+
+[Install]
+WantedBy=multi-user.target
+
+```
+
 # Roadmap
 This tools is in the making
-* Multi server with the same BOT
+* ~~Multi server with the same BOT~~
+* ~~bundle exec runner for better daemonization and independence~~
 * Better command params handling
 * Convert the message HASH into a Ruby Class
 * Change the JSON config file to a init class configuration for better customization
