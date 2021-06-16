@@ -51,6 +51,12 @@ See some examples
 
 ```json
 {
+  "server_name": "AppName",
+  "header_format": "__***{title}***__",
+  "webhooks_url" : "{webhook url}",
+  "bot_token" : "{bot token}",
+  "trello_public_key": "{trello public key}",
+  "trello_member_token": "trello member token",
   "rails": {
     "name": "Rails Logger",
     "path": "path/to/rails/log",
