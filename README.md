@@ -203,12 +203,12 @@ after 'deploy:reverted', 'emissary:restart'
 after 'deploy:published', 'emissary:restart'
 ```
 
-
 # Roadmap
 This tools is in the making
 * ~~Multi server with the same BOT~~
 * ~~bundle exec runner for better daemonization and independence~~
 * Send whole messages batch to trello
+* Create a discord channel for developers to test before installing the gem and a public trello board with this roadmap and a list for testing
 * Better command params handling
 * Convert the message HASH into a Ruby Class
 * Change the JSON config file to a init class configuration for better customization
